@@ -56,7 +56,7 @@ class TmdbService
             'release_date' => $movie['release_date'],
             'overview' => $movie['overview'],
             'genres' => $this->getMovieGenres($movie['genres']),
-            'videos' =>  $movie['videos'],
+            'videos' =>  $movie['videos']['results'] ?  $movie['videos']['results'][0]['key'] : null,
             'crew' => array_slice($movie['credits']["crew"], 0, 3),
             'cast' => $cleanCast,
             'images' => array_slice($images,0,6),

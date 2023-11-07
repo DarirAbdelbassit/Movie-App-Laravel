@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\TmdbService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class MovieController extends Controller
 {

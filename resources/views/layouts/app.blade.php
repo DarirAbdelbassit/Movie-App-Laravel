@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <title>Darir Movie App</title>
 </head>
-<!-- Header -->
-@include('pages.partials.header')
-<!-- End Header -->
 <!-- Content -->
 
 <body class="font-sans bg-gray-900 text-white">
@@ -19,15 +16,20 @@
     @include('pages.partials.navbar')
     <!-- End Navbar -->
     <!-- Content -->
-        @yield('content')
+    @yield('content')
     <!-- End Content -->
     <!-- Scripts -->
-    @include('pages.partials.scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.js"></script>
     <!-- End Scripts -->
 </body>
 <!-- End Content -->
 <!-- Footer -->
-@include('pages.partials.footer')
+<footer class="border border-t border-gray-800">
+    <div class="container mx-auto text-sm px-4 py-6">
+        Powered by <a href="https://www.themoviedb.org/documentation/api" class="underline hover:text-gray-300">TMDb
+            API</a>
+    </div>
+</footer>
 <!-- End Footer -->
 
 </html>
