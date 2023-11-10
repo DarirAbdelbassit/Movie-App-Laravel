@@ -33,7 +33,7 @@
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
             <!-- Start search input on mobile screen -->
             <div class="relative mt-3 md:hidden">
-                <livewire:search-drop-down />
+                <livewire:search-drop-down lazy/>
             </div>
             <!-- End search input on mobile screen -->
             <ul
@@ -49,7 +49,7 @@
                         Shows</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="{{ route('actors.index') }}"
                         class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Actors</a>
                 </li>
             </ul>

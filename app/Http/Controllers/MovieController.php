@@ -18,7 +18,7 @@ class MovieController extends Controller
         $popularMovies = $this->tmdb->fetchMoviesList('popular');
         $nowPlayingMovies = $this->tmdb->fetchMoviesList('now_playing');
 
-        return view('pages.index', compact('popularMovies', 'nowPlayingMovies'));
+        return view('pages.movies.index', compact('popularMovies', 'nowPlayingMovies'));
     }
 
     public function show($id)
@@ -27,6 +27,6 @@ class MovieController extends Controller
 
         // get the movie details
         $movie = $this->tmdb->fetchMovie("/$id?append_to_response=credits,videos,images");
-        return view('pages.show',compact('movie'));
+        return view('pages.movies.show',compact('movie'));
     }
 }
