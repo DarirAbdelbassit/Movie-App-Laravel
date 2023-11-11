@@ -12,6 +12,17 @@ This application serves as a feature-rich platform for movie and TV show enthusi
 
 Whether you're interested in the latest blockbuster, binge-worthy TV shows, or learning more about your favorite actors, Movie-App-Laravel has you covered.
 
+## Project Screenshots
+
+![movies index](https://github.com/DarirAbdelbassit/Movie-App-Laravel/assets/85806305/fde1374e-c4c8-4815-a6d4-cb9a08100005)
+*Movies List*
+
+![tvshows index](https://github.com/DarirAbdelbassit/Movie-App-Laravel/assets/85806305/9bfac533-d28b-4d43-9349-3c0764bead64)
+*TV Shows List*
+
+![actors show](https://github.com/DarirAbdelbassit/Movie-App-Laravel/assets/85806305/86550881-a8a6-4965-b1aa-15c7af34addd)
+*Actor Details*
+
 ## Installation
 
 To run Movie-App-Laravel on your local machine, follow these steps:
