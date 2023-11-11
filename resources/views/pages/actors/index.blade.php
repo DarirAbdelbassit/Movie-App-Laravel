@@ -24,7 +24,6 @@
                     </a>
                 </li>
 
-
                 <li>
                     <a href="{{ $has_next ? route('actors.index', ['page' => $current_page + 1]) : '#' }}"
                         class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg {{ $has_next ? 'hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white' : 'cursor-not-allowed opacity-50' }}"
@@ -39,7 +38,6 @@
                 </li>
             </ul>
         </div>
-
         <!-- End pagination -->
     </div>
 @endsection

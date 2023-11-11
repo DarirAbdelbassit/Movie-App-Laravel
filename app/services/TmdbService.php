@@ -6,19 +6,26 @@ use Illuminate\Support\Facades\Http;
 
 class TmdbService
 {
+    // variables declaration
     public $genres;
-    public function __construct()
+    // constructor
+    public function __construct($type)
     {
-        // get the genres
-        $this->genres = $this->fetchGenres()->toArray();
+        // affect the genres array to the genres property in all senarios[Movie, TvShow]
+        $this->genres = $this->fetchGenres($type)->toArray();
     }
-
-    private function getTmdbData($endpoint) // Ex:'/genre/movie/list'
+    // methods
+    private function getTmdbData($endpoint): array
     {
         // get the data from the tmdb api
-        return Http::withToken(config('services.tmdb.tmdb-token'))
-            ->get(config('services.tmdb.base_url') . $endpoint)
-            ->json();
+        $response = Http::withToken(config('services.tmdb.tmdb-token'))
+        ->get(config('services.tmdb.base_url') . $endpoint);
+        // throw an exception if the request failed
+        if ($response->failed()) {
+            throw new \Exception('TMDB API request failed: ' . $response->status());
+        }
+        // return the data as an array
+        return $response->json();
     }
 
     public function fetchMoviesList($type): \Illuminate\Support\Collection
@@ -42,6 +49,7 @@ class TmdbService
         $movie = $this->getTmdbData("/movie/$type");
         // filter the cast
         $cleanCast =  $this->filterTheCast(array_slice($movie['credits']["cast"], 0, 5));
+
         // filter the images
         $images = collect($movie['images']['backdrops'])
         ->map(fn($image) => $image['file_path'])
@@ -63,7 +71,7 @@ class TmdbService
         ];
     }
 
-    public function fetchActorsList($path)
+    public function fetchActorsList($path): array
     {
         // get the actors data
         $actors = $this->getTmdbData("$path");
@@ -83,19 +91,19 @@ class TmdbService
         return (array_merge($temp_data1, $temp_data2));
     }
 
-    public function fetchActor($path)
+    public function fetchActor($path): array
     {
         // get the actor data
         $actor = $this->getTmdbData("$path");
         $social = $this->getTmdbData("$path/external_ids");
         $cast  = $this->getTmdbData("$path/combined_credits")['cast'];
 
-        $castMovies = collect($cast)->where('media_type','movie')->sortByDesc('popularity')->take(5)->map(fn($movie) => [
+        $castMovies = collect($cast)->where('media_type', 'movie')->sortByDesc('popularity')->take(5)->map(fn($movie) => [
             'id' => $movie['id'],
             'original_title' => $movie['original_title'],
             'poster_path' => $this->getImagePath($movie['poster_path']),
         ])->toArray();
-        $credits = collect($cast)->where('media_type','movie')->sortByDesc('release_date')->map(fn($movie) => [
+        $credits = collect($cast)->where('media_type', 'movie')->sortByDesc('release_date')->map(fn($movie) => [
             'id' => $movie['id'],
             'original_title' => $movie['original_title'],
             'release_date' => $movie['release_date']  ,
@@ -119,10 +127,52 @@ class TmdbService
         ];
     }
 
-    private function fetchGenres(): \Illuminate\Support\Collection
+    public function fetchTvShowsList($type): \Illuminate\Support\Collection
+    {
+        $tvshows = $this->getTmdbData("/tv/$type")['results'];
+        // return the tvshwos as a collection
+        return collect($tvshows)->map(fn($tvshow) => [
+            'id' => $tvshow['id'],
+            'original_title' => $tvshow['original_name'],
+            'poster_path' => $this->getImagePath($tvshow['poster_path']),
+            'vote_average' => floor($tvshow['vote_average']),
+            'release_date' => $tvshow['first_air_date'],
+            'genres' => $this->getMoviesGenres($tvshow['genre_ids'], $this->genres)
+        ]);
+    }
+
+    public function fetchTvShow($id): array
+    {
+        // get the tv show data
+        $tvshow = $this->getTmdbData("/tv/$id");
+        // filter the cast
+        $cleanCast =  $this->filterTheCast(array_slice($tvshow['credits']["cast"], 0, 5));
+
+        // filter the images
+        $images = collect($tvshow['images']['backdrops'])
+        ->map(fn($image) => $image['file_path'])
+        ->unique()
+        ->map(fn($filePath) => ['file_path' => $this->getImagePath($filePath)])
+        ->toArray();
+        // return the data of the tv show
+        return [
+            'original_title' => $tvshow['original_name'],
+            'poster_path' => $this->getImagePath($tvshow['poster_path']),
+            'vote_average' => floor($tvshow['vote_average']),
+            'release_date' => $tvshow['first_air_date'],
+            'overview' => $tvshow['overview'],
+            'genres' => $this->getMovieGenres($tvshow['genres']),
+            'videos' =>  $tvshow['videos']['results'] ? $tvshow['videos']['results'][0]['key'] : null,
+            'crew' => array_slice($tvshow['credits']["crew"], 0, 3),
+            'cast' => $cleanCast,
+            'images' => array_slice($images, 0, 6),
+        ];
+
+    }
+    private function fetchGenres($type): \Illuminate\Support\Collection
     {
         // get the genres
-        $genresArray = $this->getTmdbData('/genre/movie/list')['genres'];
+        $genresArray = $this->getTmdbData("/genre/$type/list")['genres'];
         // return the genres as a collection
         return collect($genresArray)->mapWithKeys(fn($genre) => [
             $genre["id"] => $genre["name"]

@@ -7,15 +7,17 @@ use Illuminate\Http\Request;
 
 class ActorController extends Controller
 {
+    // variables declaration
     protected $tmdb;
     public $has_previous = false;
     public $has_next = true;
     public $current_page = 1;
-    public function __construct(TmdbService $tmdb)
+    // constructor
+    public function __construct()
     {
-        $this->tmdb = $tmdb;
+        $this->tmdb = new TmdbService('movie');
     }
-
+    // methods
     public function index(Request $request)
     {
         // get the page number
@@ -38,13 +40,12 @@ class ActorController extends Controller
             'current_page' => $this->current_page,
         ]);
     }
-
     public function show($id)
     {
         abort_if(!is_numeric($id), 404);
-
         // get the movie details
         $actor = $this->tmdb->fetchActor("/person/$id");
+        // return view with data
         return view('pages.actors.show', compact('actor'));
     }
 }

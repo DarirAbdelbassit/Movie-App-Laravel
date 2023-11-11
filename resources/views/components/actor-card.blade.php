@@ -1,5 +1,5 @@
 <div class="mt-8">
-    <a href="#">
+    <a href="{{route('actors.show',['id'=>$cast['id']])}}">
         <img src="{{ $cast['profile_path'] }}" alt="poster" class="hover:opacity-75 transition ease-in-out duration-150">
     </a>
     <div class="mt-2">
