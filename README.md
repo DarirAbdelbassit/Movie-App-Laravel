@@ -1,10 +1,16 @@
 # Movie-App-Laravel
 
-Movie-App-Laravel is a web application created with Laravel that utilizes the TMDb API to fetch and display movie data. Users can explore various movies, view details, and search for specific titles within the application.
+Movie-App-Laravel is a modern web application built with Laravel, Livewire, Alpine.js, and Tailwind CSS. It seamlessly integrates with the TMDb API to fetch and display comprehensive movie and TV show data. Users can explore a diverse collection of content, view detailed information, and easily search for specific titles within the application.
 
 ## Description
 
-This application serves as a user-friendly platform for movie enthusiasts to discover trending, popular, and now playing movies. It leverages the powerful features of the Laravel framework to provide a seamless and interactive experience for users.
+This application serves as a feature-rich platform for movie and TV show enthusiasts. It harnesses the power of Laravel, Livewire, Alpine.js, and Tailwind CSS to provide a delightful and interactive experience for users. Movie-App-Laravel allows users to:
+
+- Explore popular and now playing movies with details ranging from cast and crew to trailers and images.
+- Discover top-rated and popular TV shows with in-depth information.
+- Browse through a paginated list of popular actors, each with their detailed profiles, social media links, and a comprehensive list of their works and credits.
+
+Whether you're interested in the latest blockbuster, binge-worthy TV shows, or learning more about your favorite actors, Movie-App-Laravel has you covered.
 
 ## Installation
 
@@ -28,12 +34,10 @@ To run Movie-App-Laravel on your local machine, follow these steps:
     composer install
     ```
 
-4. Create a copy of the `.env.example` file and rename it to `.env`. Configure the necessary environment variables, including the database settings and the TMDb API key.
+4. Create a copy of the `.env.example` file and rename it to `.env`. Open the `.env` file and update the `TMDB_TOKEN` value with the API key you obtained from [TMDb](https://www.themoviedb.org/login?to=read_me&redirect=%2Fdocs).
 
-    ```
-    TMDB_TOKEN="If you don't have one, follow the instructions below to obtain it."
-    BASE_URL="https://api.themoviedb.org/3"
-    POSTER_URL="https://image.tmdb.org/t/p/w500"
+    ```dotenv
+    TMDB_TOKEN=your-tmdb-api-key
     ```
 
 5. Generate the application key:
@@ -42,29 +46,36 @@ To run Movie-App-Laravel on your local machine, follow these steps:
     php artisan key:generate
     ```
 
-6. Run the database migrations:
+6. Install npm dependencies:
 
     ```bash
-    php artisan migrate
+    npm install
     ```
 
-7. Start the local development server:
+7. Compile assets:
+
+    ```bash
+    npm run dev
+    ```
+
+8. Start the local development server:
 
     ```bash
     php artisan serve
     ```
 
-8. Open your web browser and go to `http://localhost:8000` to access the Movie-App-Laravel application.
+9. Open your web browser and go to `http://localhost:8000` to access the Movie-App-Laravel application.
 
 ## Usage
 
-- Browse through the collection of movies and view their details.
-- Utilize the search feature to find specific movies by title.
-- Explore the latest popular and now playing movies from the TMDb API.
+- Explore a wide variety of popular and now playing movies with detailed information.
+- Discover top-rated and popular TV shows with comprehensive details.
+- Browse through a paginated list of popular actors, each with detailed profiles and social media links.
+- Dive into actor details, including their social media presence and a comprehensive list of their works and credits.
 
 ## Obtaining the TMDb API Token
 
-To utilize the TMDb API in this application, you will need to acquire an API token from [The Movie Database (TMDb)](https://www.themoviedb.org/documentation/api). If you don't have a token yet, you can follow these steps to obtain one:
+To utilize the TMDb API in this application, you will need to acquire an API token from [The Movie Database (TMDb)](https://www.themoviedb.org/documentation/api):
 
 1. Visit the [TMDb API documentation](https://www.themoviedb.org/documentation/api) page.
 2. Sign up for a free account if you don't have one.
