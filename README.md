@@ -14,13 +14,13 @@ Whether you're interested in the latest blockbuster, binge-worthy TV shows, or l
 
 ## Project Screenshots
 
-![movies index](https://github.com/DarirAbdelbassit/Movie-App-Laravel/assets/85806305/fde1374e-c4c8-4815-a6d4-cb9a08100005)
+![movies index](https://github.com/DarirAbdelbassit/Movie-App-Laravel/assets/85806305/a4a2390e-b50f-4aae-b8ca-d3b8262a559c)
 *Movies List*
 
-![tvshows index](https://github.com/DarirAbdelbassit/Movie-App-Laravel/assets/85806305/9bfac533-d28b-4d43-9349-3c0764bead64)
+![tvshows index](https://github.com/DarirAbdelbassit/Movie-App-Laravel/assets/85806305/367f0030-d63f-4d5c-aac3-1ad7114aeab9)
 *TV Shows List*
 
-![actors show](https://github.com/DarirAbdelbassit/Movie-App-Laravel/assets/85806305/86550881-a8a6-4965-b1aa-15c7af34addd)
+![actors show](https://github.com/DarirAbdelbassit/Movie-App-Laravel/assets/85806305/2982a5a6-a2f1-4d0e-ae55-ecdf55e7e8b8)
 *Actor Details*
 
 ## Installation
